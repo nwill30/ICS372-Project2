@@ -24,7 +24,8 @@
  */
 public class RefrigeratorContext {
     private static RefrigeratorDisplay refrigeratorDisplay;
-    private RefrigeratorState currentState;
+    private FridgeState currentFridgeState;
+    private FreezerState currentFreezerState;
     private static RefrigeratorContext instance;
 
     /**
@@ -33,7 +34,8 @@ public class RefrigeratorContext {
     private RefrigeratorContext() {
         instance = this;
         refrigeratorDisplay = RefrigeratorDisplay.instance();
-        currentState = DoorClosedState.instance();
+        currentFridgeState = FridgeDoorClosedState.instance();
+        currentFreezerState = FreezerDoorClosedState.instance();
     }
 
     /**
@@ -62,7 +64,7 @@ public class RefrigeratorContext {
      * @param nextState
      *            the next state
      */
-    public void changeCurrentState(RefrigeratorState nextState) {
+    public void changeCurrentState(FridgeState nextState) {
         currentState.leave();
         currentState = nextState;
         nextState.run();

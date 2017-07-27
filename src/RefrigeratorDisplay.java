@@ -51,35 +51,79 @@ public abstract class RefrigeratorDisplay extends Observable {
         context.initialize();
     }
 
-    public abstract void displayTimeRemaining(int time);
+    /**
+     * Display the current room temerature.
+     * */
+    public abstract void displayRoomTemp(int value);
 
     /**
-     * Indicate that the light is on
-     */
-    public abstract void turnLightOn();
+     * Display the current fridge temerature.
+     * */
+    public abstract void displayFridgeTemp(int value);
 
     /**
-     * Indicate that the light is off
+     * Display the current freezer temerature.
+     * */
+    public abstract void displayFreezerTemp(int value);
+
+    /**
+     * Indicate that the freezer light is on
      */
-    public abstract void turnLightOff();
+    public abstract void turnFreezerLightOn();
+
+    /**
+     * Indicate that the freezer light is off
+     */
+    public abstract void turnFreezerLightOff();
+
+    /**
+     * Indicate that the fridge light is on
+     */
+    public abstract void turnFridgeLightOn();
+
+    /**
+     * Indicate that the fridge light is off
+     */
+    public abstract void turnFridgeLightOff();
 
     /**
      * Indicate that the door is now closed
      */
-    public abstract void doorClosed();
+    public abstract void freezerDoorClosed();
 
     /**
      * Indicate that the door is now open
      */
-    public abstract void doorOpened();
+    public abstract void freezerDoorOpened();
 
     /**
-     * indicate that cooking has begun
+     * Indicate that the door is now closed
      */
-    public abstract void startCooking();
+    public abstract void fridgeDoorClosed();
 
     /**
-     * indicate that cooking has ended
+     * Indicate that the door is now open
      */
-    public abstract void notCooking();
+    public abstract void fridgeDoorOpened();
+
+    /**
+     * Indicating the freezer is in a cooling state.
+     * */
+    public abstract void freezerCooling();
+
+    /**
+     * Indicating the freezer is in an idle state.
+     * */
+    public abstract void freezerIdle();
+
+    /**
+     * Indicating the fridge is in a cooling state
+     * */
+    public abstract void fridgeCooling();
+
+    /**
+     * Indicating the fridge is in an idle state.
+     * */
+    public abstract void fridgeIdle();
+
 }
