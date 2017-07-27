@@ -26,24 +26,24 @@ import java.util.Observer;
  * states
  *
  */
-public class RefrigeratorContext implements Observer {
+public class FreezerContext implements Observer {
     private static RefrigeratorDisplay refrigeratorDisplay;
-    private RefrigeratorState currentState;
-    private static RefrigeratorContext instance;
+    private FreezerState currentState;
+    private static FreezerContext instance;
 
 
     public static enum Events {
-        FRIDGE_CLOSED_EVENT, FRIDGE_OPEN_EVENT,
+        FREEZER_CLOSED_EVENT,FREEZER_OPEN_EVENT, FRIDGE_CLOSED_EVENT, FRIDGE_OPEN_EVENT,
         SET_FREEZER_TEMP_EVENT, SET_FRIDGE_TEMP_EVENT,SET_ROOM_TEMP
     };
 
     /**
      * Make it a singleton
      */
-    private RefrigeratorContext() {
+    private FreezerContext() {
         instance = this;
         refrigeratorDisplay = RefrigeratorDisplay.instance();
-        currentState = FridgeClosedState.instance();
+        currentState = FreezerClosedState.instance();
     }
 
     /**
@@ -51,9 +51,9 @@ public class RefrigeratorContext implements Observer {
      *
      * @return the object
      */
-    public static RefrigeratorContext instance() {
+    public static FreezerContext instance() {
         if (instance == null) {
-            instance = new RefrigeratorContext();
+            instance = new FreezerContext();
         }
         return instance;
     }
@@ -63,7 +63,7 @@ public class RefrigeratorContext implements Observer {
      * observable for clock
      */
     public void initialize() {
-        instance.changeCurrentState(FridgeClosedState.instance());
+        instance.changeCurrentState(FreezerClosedState.instance());
     }
 
     /**
@@ -72,7 +72,7 @@ public class RefrigeratorContext implements Observer {
      * @param nextState
      *            the next state
      */
-    public void changeCurrentState(RefrigeratorState nextState) {
+    public void changeCurrentState(FreezerState nextState) {
         currentState = nextState;
         nextState.run();
     }

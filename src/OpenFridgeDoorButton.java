@@ -17,6 +17,5 @@ public class OpenFridgeDoorButton extends GUIButton {
      */
     @Override
     public void inform(RefrigeratorDisplay source) {
-        DoorCloseManager.instance().processEvent(new DoorCloseEvent(source));
     }
 }

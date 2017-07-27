@@ -22,15 +22,15 @@
  *
  *
  */
-public abstract class RefrigeratorState {
-    protected static RefrigeratorContext context;
+public abstract class FreezerState {
+    protected static FreezerContext context;
     protected static RefrigeratorDisplay display;
 
     /**
      * Initialzies the context and display
      */
-    protected RefrigeratorState() {
-        context = RefrigeratorContext.instance();
+    protected FreezerState() {
+        context = FreezerContext.instance();
         display = context.getDisplay();
     }
 

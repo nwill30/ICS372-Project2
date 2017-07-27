@@ -3,6 +3,11 @@
  */
 public class OpenFreezerDoorButton extends GUIButton {
     public OpenFreezerDoorButton(String s) {
-        super();
+        super(s);
+    }
+
+    @Override
+    public void inform(RefrigeratorDisplay display) {
+
     }
 }

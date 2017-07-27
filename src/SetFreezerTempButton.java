@@ -3,6 +3,11 @@
  */
 public class SetFreezerTempButton extends GUIButton {
     public SetFreezerTempButton(String s) {
-        super();
+        super(s);
+    }
+
+    @Override
+    public void inform(RefrigeratorDisplay display) {
+
     }
 }

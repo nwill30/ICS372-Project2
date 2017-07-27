@@ -24,6 +24,7 @@ import java.util.Observable;
  * a lot of freedom to choose its display.
  */
 public abstract class RefrigeratorDisplay extends Observable {
+    protected static FreezerContext freezerContext;
     protected static RefrigeratorContext context;
     protected static RefrigeratorDisplay instance;
 
@@ -33,6 +34,7 @@ public abstract class RefrigeratorDisplay extends Observable {
     protected RefrigeratorDisplay() {
         instance = this;
         context = RefrigeratorContext.instance();
+        freezerContext = FreezerContext.instance();
     }
 
     /**
@@ -49,29 +51,41 @@ public abstract class RefrigeratorDisplay extends Observable {
      */
     public void initialize() {
         context.initialize();
+        freezerContext.initialize();
     }
 
     public abstract void displayTimeRemaining(int time);
 
     /**
-     * Indicate that the light is on
+     * Indicate that the Freezer light is on
      */
-    public abstract void turnLightOn();
+    public abstract void turnFreezerLightOn();
 
     /**
-     * Indicate that the light is off
+     * Indicate that the Freezer light is off
      */
-    public abstract void turnLightOff();
+    public abstract void turnFreezerLightOff();
 
     /**
-     * Indicate that the door is now closed
+     * Indicate that the Fridge light is on
      */
-    public abstract void doorClosed();
+    public abstract void turnFridgeLightOn();
+
+    /**
+     * Indicate that the Fridge light is off
+     */
+    public abstract void turnFridgeLightOff();
+
+
+    /**
+     * Indicate that the  Freezer door is now closed
+     */
+    public abstract void freezerDoorClosed();
 
     /**
      * Indicate that the door is now open
      */
-    public abstract void doorOpened();
+    public abstract void freezerDoorOpened();
 
     /**
      * indicate that cooking has begun
@@ -82,4 +96,8 @@ public abstract class RefrigeratorDisplay extends Observable {
      * indicate that cooking has ended
      */
     public abstract void notCooking();
+
+    public abstract void fridgeDoorOpened();
+
+    public abstract void fridgeDoorClosed();
 }

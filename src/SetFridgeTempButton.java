@@ -3,6 +3,11 @@
  */
 public class SetFridgeTempButton extends GUIButton {
     public SetFridgeTempButton(String s) {
-        super();
+        super(s);
+    }
+
+    @Override
+    public void inform(RefrigeratorDisplay display) {
+
     }
 }

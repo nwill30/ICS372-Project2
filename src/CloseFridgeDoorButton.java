@@ -3,6 +3,11 @@
  */
 public class CloseFridgeDoorButton extends GUIButton {
     public CloseFridgeDoorButton(String s) {
-        super();
+        super(s);
+    }
+
+    @Override
+    public void inform(RefrigeratorDisplay display) {
+
     }
 }
