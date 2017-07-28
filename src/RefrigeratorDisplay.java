@@ -54,7 +54,20 @@ public abstract class RefrigeratorDisplay extends Observable {
         freezerContext.initialize();
     }
 
-    public abstract void displayTimeRemaining(int time);
+    /**
+     * Display the current room temerature.
+     * */
+    public abstract void displayRoomTemp(int value);
+
+    /**
+     * Display the current fridge temerature.
+     * */
+    public abstract void displayFridgeTemp(int value);
+
+    /**
+     * Display the current freezer temerature.
+     * */
+    public abstract void displayFreezerTemp(int value);
 
     /**
      * Indicate that the Freezer light is on
@@ -88,16 +101,33 @@ public abstract class RefrigeratorDisplay extends Observable {
     public abstract void freezerDoorOpened();
 
     /**
-     * indicate that cooking has begun
+     * Indicate that the door is now closed
      */
-    public abstract void startCooking();
-
-    /**
-     * indicate that cooking has ended
-     */
-    public abstract void notCooking();
-
     public abstract void fridgeDoorOpened();
 
+    /**
+     * Indicate that the door is now open
+     */
     public abstract void fridgeDoorClosed();
+
+    /**
+     * Indicating the freezer is in a cooling state.
+     * */
+    public abstract void freezerCooling();
+
+    /**
+     * Indicating the freezer is in an idle state.
+     * */
+    public abstract void freezerIdle();
+
+    /**
+     * Indicating the fridge is in a cooling state
+     * */
+    public abstract void fridgeCooling();
+
+    /**
+     * Indicating the fridge is in an idle state.
+     * */
+    public abstract void fridgeIdle();
+
 }

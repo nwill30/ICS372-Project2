@@ -37,11 +37,6 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
         initialize();
     }
 
-    @Override
-    public void displayTimeRemaining(int time) {
-
-    }
-
     /**
      * Inner class because the outer class extends RefrigeratorDisplay.
      *
@@ -58,12 +53,13 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
         private JLabel setFridgeTempLbl = new JLabel("Desired fridge temp");
         private JLabel setFreezerTempLbl = new JLabel("Desired freezer temp");
         private JLabel statusLbl = new JLabel("Status");
-        private JLabel fridgeLight = new JLabel("            ");
-        private JLabel freezerLight = new JLabel("            ");
+        private JLabel fridgeLight = new JLabel("Fridge ligtht off");
+        private JLabel freezerLight = new JLabel("Freezer light off");
         private JLabel fridgeTemp = new JLabel("            ");
         private JLabel freezerTemp = new JLabel("            ");
-        private JLabel fridgeStatus = new JLabel("            ");
-        private JLabel freezerStatus = new JLabel("            ");
+        private JLabel roomTemp = new JLabel("            ");
+        private JLabel fridgeStatus = new JLabel("Idle");
+        private JLabel freezerStatus = new JLabel("Idle");
         private JTextField roomTempTextField = new JTextField("INPUT ROOM TEMP HERE");
         private JTextField fridgeTempTextField = new JTextField("INPUT FRIDGE TEMP BETWEEN 37 and 41 F");
         private JTextField freezerTempTextField = new JTextField("INPUT FREEZER TEMP BETWEEN -9 and 0 F");
@@ -143,8 +139,20 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
 
     }
 
+    /***/
+    @Override
+    public void displayRoomTemp(int value){ frame.roomTemp.setText(" " + value);}
+
+    /***/
+    @Override
+    public void displayFridgeTemp(int value){ frame.fridgeTemp.setText(" " + value);};
+
+    /***/
+    @Override
+    public void displayFreezerTemp(int value){ frame.freezerTemp.setText(" " + value);};
+
     /**
-     * Display a text indicating that the light is on
+     * Display a text indicating that the freezer light is on
      */
     @Override
     public void turnFreezerLightOn() {
@@ -152,25 +160,31 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
     }
 
     /**
-     * Display a text indicating that the light is off
+     * Display a text indicating that the freezer light is off
      */
     @Override
     public void turnFreezerLightOff() {
         frame.freezerLight.setText("Freezer Light Off");
     }
 
+    /**
+     * Display a text indicating that the fridge light is on
+     */
     @Override
     public void turnFridgeLightOn() {
         frame.fridgeLight.setText("Fridge Light On");
     }
 
+    /**
+     * Display a text indicating that the freezer door is open
+     */
     @Override
     public void turnFridgeLightOff() {
         frame.fridgeLight.setText("Fridge Light Off");
     }
 
     /**
-     * Display a text indicating that the door is closed
+     * Display a text indicating that the freezer door is closed
      */
     @Override
     public void freezerDoorClosed() {
@@ -185,56 +199,44 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
         frame.freezerStatus.setText("Freezer Door Opened");
     }
 
+    /**
+     * Display a text indicating that the fridge door is open
+     */
     @Override
     public void fridgeDoorOpened(){
         frame.fridgeStatus.setText("Fridge Door Opened");
     }
 
+    /**
+     * Display a text indicating that the fridge door is closed
+     */
     @Override
     public void fridgeDoorClosed(){
         frame.fridgeStatus.setText("Fridge Door Closed");
     }
 
+    /***/
     @Override
-    public void startCooking() {
+    public void freezerCooling(){frame.freezerStatus.setText("Freezer Cooling");};
 
-    }
-
+    /***/
     @Override
-    public void notCooking() {
+    public void freezerIdle(){frame.freezerStatus.setText("Freezer Idle");};
 
-    }
+    /***/
+    @Override
+    public void fridgeCooling(){frame.fridgeStatus.setText("Fridge Cooling");};
+
+    /***/
+    @Override
+    public void fridgeIdle(){frame.fridgeStatus.setText("Fridge Idle");};
 
     /**
-     * Display the remaining cook time
-//     */
-//    @Override
-//    public void displayTimeRemaining(int value) {
-//        frame.timerValue.setText(" " + value);
-//    }
-//
-//    /**
-//     * Display a text indicating that cooking has started
-//     */
-//    @Override
-//    public void startCooking() {
-//        frame.cookingStatus.setText("Cooking");
-//    }
-//
-//    /**
-//     * Display a text indicating that cooking has ended
-//     */
-//    @Override
-//    public void notCooking() {
-//        frame.cookingStatus.setText("Not cooking");
-//    }
-//
-//    /**
-//     * Start the whole show
-//     *
-//     * @param args
-//     *            not used
- //    */
+     * Start the whole show
+     *
+     * @param args
+     *            not used
+     */
     public static void main(String[] args) {
         RefrigeratorDisplay display = new GUIDisplay();
     }
