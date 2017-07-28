@@ -1,16 +1,26 @@
 
-public class FreezerClosedState extends FreezerState {
+public class FreezerClosedState extends FreezerState implements
+        FreezerDoorOpenListner{
     private static FreezerClosedState instance;
-    static{
-        instance = new FreezerClosedState();
+
+    private FreezerClosedState(){}
+
+    @Override
+    public void leave(){
+        FreezerDoorOpenManager.instance().removeFreezerDoorOpenListner(instance);
+
     }
 
     public static FreezerClosedState instance(){
+        if(instance == null){
+            instance = new FreezerClosedState();
+        }
         return instance;
     }
 
+
     public void processFreezerOpen(){
-        context.changeCurrentState(FreezerOpenState.instance());
+        context.changeFreezerCurrentState(FreezerOpenState.instance());
     }
     @Override
     public void run() {
@@ -20,9 +30,7 @@ public class FreezerClosedState extends FreezerState {
     }
 
     @Override
-    public void handle(Object event) {
-        if(event.equals(Context.Events.FREEZER_OPEN_EVENT)){
-            processFreezerOpen();
-        }
+    public void freezerDoorOpened(FreezerDoorOpenEvent even) {
+        context.changeFreezerCurrentState(FreezerOpenState.instance());
     }
 }

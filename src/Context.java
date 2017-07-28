@@ -26,24 +26,20 @@ import java.util.Observer;
  * states
  *
  */
-public class Context implements Observer {
+public class Context {
     private static RefrigeratorDisplay refrigeratorDisplay;
-    private FreezerState currentState;
+    private FreezerState freezerCurrentState;
+    private FridgeState fridgeCurrentState;
     private static Context instance;
 
-
-    public static enum Events {
-        FREEZER_CLOSED_EVENT,FREEZER_OPEN_EVENT, FRIDGE_CLOSED_EVENT, FRIDGE_OPEN_EVENT,
-        SET_FREEZER_TEMP_EVENT, SET_FRIDGE_TEMP_EVENT,SET_ROOM_TEMP_EVENT
-    };
-
-    /**
+     /**
      * Make it a singleton
      */
     private Context() {
         instance = this;
         refrigeratorDisplay = RefrigeratorDisplay.instance();
-        currentState = FreezerClosedState.instance();
+        freezerCurrentState = FreezerClosedState.instance();
+        fridgeCurrentState = FridgeClosedState.instance();
     }
 
     /**
@@ -63,7 +59,8 @@ public class Context implements Observer {
      * observable for clock
      */
     public void initialize() {
-        instance.changeCurrentState(FreezerClosedState.instance());
+        instance.changeFreezerCurrentState(FreezerClosedState.instance());
+        instance.changeFridgeCurrentState(FridgeClosedState.instance());
     }
 
     /**
@@ -72,21 +69,21 @@ public class Context implements Observer {
      * @param nextState
      *            the next state
      */
-    public void changeCurrentState(FreezerState nextState) {
-        currentState = nextState;
+    public void changeFreezerCurrentState(FreezerState nextState) {
+        freezerCurrentState = nextState;
         nextState.run();
     }
 
-    public void processEvent(Object arg){
-        currentState.handle(arg);
+    /**
+     * Called from the states to change the current state
+     *
+     * @param nextState
+     *            the next state
+     */
+    public void changeFridgeCurrentState(FridgeState nextState) {
+        fridgeCurrentState = nextState;
+        nextState.run();
     }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        currentState.handle(arg);
-    }
-
-
     /**
      * Gets the display
      *

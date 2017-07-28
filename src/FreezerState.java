@@ -39,9 +39,5 @@ public abstract class FreezerState {
      */
     public abstract void run();
 
-    /**
-     * When the Refrigerator leaves from this state, this method is called to
-     * remove the state as a listener for the appropriate events.
-     */
-    public abstract void handle(Object event);
+    public abstract void leave();
 }

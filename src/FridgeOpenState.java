@@ -1,4 +1,4 @@
-public class FridgeOpenState extends RefrigeratorState {
+public class FridgeOpenState extends FridgeState {
     private static FridgeOpenState instance;
     static{
         instance = new FridgeOpenState();
@@ -9,7 +9,7 @@ public class FridgeOpenState extends RefrigeratorState {
     }
 
     public void processDoorClose(){
-        context.changeCurrentState(FridgeClosedState.instance());
+        context.changeFridgeCurrentState(FridgeClosedState.instance());
     }
 
     @Override

@@ -112,36 +112,7 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-//        ((GUIButton) event.getSource()).inform(this);
-        if(event.getSource().equals(frame.freezerDoorCloseBtn)){
-            Context.instance().processEvent
-                    (Context.Events.FREEZER_CLOSED_EVENT);
-        }
-        else if (event.getSource().equals(frame.freezerDoorOpenBtn)){
-            Context.instance().processEvent
-                    (Context.Events.FREEZER_OPEN_EVENT);
-        }
-        else if(event.getSource().equals(frame.fridgeDoorCloseBtn)){
-            RefrigeratorContext.instance().processEvent
-                    (RefrigeratorContext.Events.FRIDGE_CLOSED_EVENT);
-        }
-        else if(event.getSource().equals(frame.fridgeDoorOpenBtn)){
-            RefrigeratorContext.instance().processEvent
-                    (RefrigeratorContext.Events.FRIDGE_OPEN_EVENT);
-        }
-        else if(event.getSource().equals(frame.setFreezerTempBtn)){
-            Context.instance().processEvent
-                    (Context.Events.SET_FREEZER_TEMP_EVENT);
-        }
-        else if(event.getSource().equals(frame.setFridgeTempBtn)){
-            RefrigeratorContext.instance().processEvent
-                    (Context.Events.SET_FRIDGE_TEMP_EVENT);
-        }
-        else if(event.getSource().equals(frame.setRoomTempBtn)){
-            RefrigeratorContext.instance().processEvent
-                    (Context.Events.SET_ROOM_TEMP_EVENT);
-        }
-
+        ((GUIButton) event.getSource()).inform(this);
     }
 
     /***/
