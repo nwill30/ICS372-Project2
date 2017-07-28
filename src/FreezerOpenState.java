@@ -21,7 +21,7 @@ public class FreezerOpenState extends FreezerState {
 
     @Override
     public void handle(Object event) {
-        if(event.equals(FreezerContext.Events.FREEZER_CLOSED_EVENT)){
+        if(event.equals(Context.Events.FREEZER_CLOSED_EVENT)){
             processDoorClose();
         }
     }

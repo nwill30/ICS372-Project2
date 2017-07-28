@@ -26,21 +26,21 @@ import java.util.Observer;
  * states
  *
  */
-public class FreezerContext implements Observer {
+public class Context implements Observer {
     private static RefrigeratorDisplay refrigeratorDisplay;
     private FreezerState currentState;
-    private static FreezerContext instance;
+    private static Context instance;
 
 
     public static enum Events {
         FREEZER_CLOSED_EVENT,FREEZER_OPEN_EVENT, FRIDGE_CLOSED_EVENT, FRIDGE_OPEN_EVENT,
-        SET_FREEZER_TEMP_EVENT, SET_FRIDGE_TEMP_EVENT,SET_ROOM_TEMP
+        SET_FREEZER_TEMP_EVENT, SET_FRIDGE_TEMP_EVENT,SET_ROOM_TEMP_EVENT
     };
 
     /**
      * Make it a singleton
      */
-    private FreezerContext() {
+    private Context() {
         instance = this;
         refrigeratorDisplay = RefrigeratorDisplay.instance();
         currentState = FreezerClosedState.instance();
@@ -51,9 +51,9 @@ public class FreezerContext implements Observer {
      *
      * @return the object
      */
-    public static FreezerContext instance() {
+    public static Context instance() {
         if (instance == null) {
-            instance = new FreezerContext();
+            instance = new Context();
         }
         return instance;
     }
