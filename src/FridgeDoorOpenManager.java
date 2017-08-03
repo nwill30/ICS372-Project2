@@ -2,7 +2,7 @@ import javax.swing.event.EventListenerList;
 import java.util.EventListener;
 
 public class FridgeDoorOpenManager {
-    private EventListenerList listnerList = new EventListenerList();
+    private EventListenerList listenerList = new EventListenerList();
     private static FridgeDoorOpenManager instance;
 
     /**
@@ -26,18 +26,18 @@ public class FridgeDoorOpenManager {
      *
      * @param listner and objec tthat wants to listend to the event
      * */
-    public void addFridgeDoorOpenListner(FridgeDoorOpenListner listner){
-        listnerList.add(FridgeDoorOpenListner.class, listner);
+    public void addFridgeDoorOpenListner(FridgeDoorOpenListener listner){
+        listenerList.add(FridgeDoorOpenListener.class, listner);
     }
 
     /**
      * Removes a listner
      *
-     * @param listner
+     * @param listener
      * the object to be remove
      * */
-    public void removeFridgeDoorOpenListner(FridgeDoorOpenListner listner){
-        listnerList.remove(FridgeDoorOpenListner.class, listner);
+    public void removeFridgeDoorOpenListener(FridgeDoorOpenListener listener){
+        listenerList.remove(FridgeDoorOpenListener.class, listener);
     }
 
     /**
@@ -46,9 +46,9 @@ public class FridgeDoorOpenManager {
      * @param event the something event object
      * */
     public void processEvent(FridgeDoorOpenEvent event){
-        EventListener[] listeners = listnerList.getListeners(FridgeDoorOpenListner.class);
+        EventListener[] listeners = listenerList.getListeners(FridgeDoorOpenListener.class);
         for(int index = 0; index <listeners.length;index++){
-            ((FridgeDoorOpenListner) listeners[index]).fridgeDoorOpened(event);
+            ((FridgeDoorOpenListener) listeners[index]).fridgeDoorOpened(event);
         }
     }
 }

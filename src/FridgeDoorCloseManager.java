@@ -25,8 +25,8 @@ public class FridgeDoorCloseManager {
      * Adds a listner
      * @param  listener an objec that wants to listen to the event
      * */
-    public void addFridgeDoorCloseistener(FridgeDoorCloseListner listener){
-        listenerList.add(FridgeDoorCloseListner.class,listener);
+    public void addFridgeDoorCloseListener(FridgeDoorCloseListener listener){
+        listenerList.add(FridgeDoorCloseListener.class,listener);
     }
 
     /**
@@ -34,8 +34,8 @@ public class FridgeDoorCloseManager {
      *
      * @param listener the object to be removed
      * */
-    public void removeFridgeCloseListener(FridgeDoorCloseListner listener) {
-        listenerList.remove(FridgeDoorCloseListner.class, listener);
+    public void removeFridgeCloseListener(FridgeDoorCloseListener listener) {
+        listenerList.remove(FridgeDoorCloseListener.class, listener);
     }
 
     /**
@@ -44,9 +44,9 @@ public class FridgeDoorCloseManager {
      * #param event the sometheing object
      * */
     public void processEvent(FridgeDoorCloseEvent event){
-        EventListener[] listeners = listenerList.getListeners(FridgeDoorCloseListner.class);
+        EventListener[] listeners = listenerList.getListeners(FridgeDoorCloseListener.class);
         for(int index = 0; index < listeners.length;index++){
-            ((FridgeDoorCloseListner) listeners[index]).fridgeDoorClosed(event);
+            ((FridgeDoorCloseListener) listeners[index]).fridgeDoorClosed(event);
         }
     }
 }

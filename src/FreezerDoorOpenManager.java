@@ -2,7 +2,7 @@ import javax.swing.event.EventListenerList;
 import java.util.EventListener;
 
 public class FreezerDoorOpenManager {
-    private EventListenerList listnerList = new EventListenerList();
+    private EventListenerList listenerList = new EventListenerList();
     private static FreezerDoorOpenManager instance;
 
     /**
@@ -26,18 +26,18 @@ public class FreezerDoorOpenManager {
      *
      * @param listner and objec tthat wants to listend to the event
      * */
-    public void addFreezerDoorOpenListner(FreezerDoorOpenListner listner){
-        listnerList.add(FreezerDoorOpenListner.class, listner);
+    public void addFreezerDoorOpenListner(FreezerDoorOpenListener listner){
+        listenerList.add(FreezerDoorOpenListener.class, listner);
     }
 
     /**
      * Removes a listner
      *
-     * @param listner
+     * @param listener
      * the object to be remove
      * */
-    public void removeFreezerDoorOpenListner(FreezerDoorOpenListner listner){
-        listnerList.remove(FreezerDoorOpenListner.class, listner);
+    public void removeFreezerDoorOpenListener(FreezerDoorOpenListener listener){
+        listenerList.remove(FreezerDoorOpenListener.class, listener);
     }
 
     /**
@@ -46,9 +46,9 @@ public class FreezerDoorOpenManager {
      * @param event the something event object
      * */
     public void processEvent(FreezerDoorOpenEvent event){
-        EventListener[] listeners = listnerList.getListeners(FreezerDoorOpenListner.class);
+        EventListener[] listeners = listenerList.getListeners(FreezerDoorOpenListener.class);
         for(int index = 0; index <listeners.length;index++){
-            ((FreezerDoorOpenListner) listeners[index]).freezerDoorOpened(event);
+            ((FreezerDoorOpenListener) listeners[index]).freezerDoorOpened(event);
         }
     }
 }

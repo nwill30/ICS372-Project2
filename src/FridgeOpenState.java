@@ -1,4 +1,4 @@
-public class FridgeOpenState extends FridgeState {
+public class FridgeOpenState extends FridgeState implements FridgeDoorCloseListener{
     private static FridgeOpenState instance;
     static{
         instance = new FridgeOpenState();
@@ -14,15 +14,20 @@ public class FridgeOpenState extends FridgeState {
 
     @Override
     public void run() {
+        FridgeDoorCloseManager.instance().addFridgeDoorCloseListener(instance);
         display.turnFridgeLightOn();
         display.fridgeDoorOpened();
 
     }
 
     @Override
-    public void handle(Object event) {
-        if(event.equals(RefrigeratorContext.Events.FRIDGE_CLOSED_EVENT)){
-            processDoorClose();
-        }
+    public void leave() {
+        FridgeDoorCloseManager.instance().removeFridgeCloseListener(instance);
+    }
+
+
+    @Override
+    public void fridgeDoorClosed(FridgeDoorCloseEvent event) {
+        context.changeFridgeCurrentState(FridgeClosedState.instance());
     }
 }
