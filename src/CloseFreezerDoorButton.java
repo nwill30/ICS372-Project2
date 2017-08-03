@@ -8,6 +8,6 @@ public class CloseFreezerDoorButton extends GUIButton {
 
     @Override
     public void inform(RefrigeratorDisplay display) {
-
+        FreezerDoorCloseManager.instance().processEvent(new FreezerDoorCloseEvent(display));
     }
 }
