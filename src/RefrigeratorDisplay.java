@@ -24,8 +24,7 @@ import java.util.Observable;
  * a lot of freedom to choose its display.
  */
 public abstract class RefrigeratorDisplay extends Observable {
-    protected static FreezerContext freezerContext;
-    protected static RefrigeratorContext context;
+    protected static Context context;
     protected static RefrigeratorDisplay instance;
 
     /**
@@ -33,8 +32,7 @@ public abstract class RefrigeratorDisplay extends Observable {
      */
     protected RefrigeratorDisplay() {
         instance = this;
-        context = RefrigeratorContext.instance();
-        freezerContext = FreezerContext.instance();
+        context = Context.instance();
     }
 
     /**
@@ -51,7 +49,7 @@ public abstract class RefrigeratorDisplay extends Observable {
      */
     public void initialize() {
         context.initialize();
-        freezerContext.initialize();
+        context.initialize();
     }
 
     /**

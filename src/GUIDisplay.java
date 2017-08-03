@@ -82,19 +82,20 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
             getContentPane().add(setFreezerTempBtn);
             getContentPane().add(fridgeDoorOpenBtn);
             getContentPane().add(fridgeDoorCloseBtn);
-            getContentPane().add(spaceFiller);
+//            getContentPane().add(spaceFiller);
             getContentPane().add(freezerDoorOpenBtn);
             getContentPane().add(freezerDoorCloseBtn);
-            getContentPane().add(spaceFiller);
+//            getContentPane().add(spaceFiller);
             getContentPane().add(statusLbl);
-            getContentPane().add(spaceFiller);
-            getContentPane().add(spaceFiller);
+//            getContentPane().add(spaceFiller);
+//            getContentPane().add(spaceFiller);
             getContentPane().add(fridgeLight);
             getContentPane().add(freezerLight);
-            getContentPane().add(spaceFiller);
+//            getContentPane().add(spaceFiller);
             getContentPane().add(fridgeTemp);
             getContentPane().add(freezerTemp);
-            getContentPane().add(spaceFiller);
+            getContentPane().add(roomTemp);
+//            getContentPane().add(spaceFiller);
             getContentPane().add(fridgeStatus);
             getContentPane().add(freezerStatus);
             freezerDoorCloseBtn.addActionListener(GUIDisplay.this);
@@ -111,32 +112,7 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-//        ((GUIButton) event.getSource()).inform(this);
-        if(event.getSource().equals(frame.freezerDoorCloseBtn)){
-            FreezerContext.instance().processEvent
-                    (FreezerContext.Events.FREEZER_CLOSED_EVENT);
-        }
-        else if (event.getSource().equals(frame.freezerDoorOpenBtn)){
-            FreezerContext.instance().processEvent
-                    (FreezerContext.Events.FREEZER_OPEN_EVENT);
-        }
-        else if(event.getSource().equals(frame.fridgeDoorCloseBtn)){
-            RefrigeratorContext.instance().processEvent
-                    (RefrigeratorContext.Events.FRIDGE_CLOSED_EVENT);
-        }
-        else if(event.getSource().equals(frame.fridgeDoorOpenBtn)){
-            RefrigeratorContext.instance().processEvent
-                    (RefrigeratorContext.Events.FRIDGE_OPEN_EVENT);
-        }
-        else if(event.getSource().equals(frame.setFreezerTempBtn)){
-            FreezerContext.instance().processEvent
-                    (FreezerContext.Events.SET_FREEZER_TEMP_EVENT);
-        }
-        else if(event.getSource().equals(frame.setFridgeTempBtn)){
-            RefrigeratorContext.instance().processEvent
-                    (FreezerContext.Events.SET_FRIDGE_TEMP_EVENT);
-        }
-
+        ((GUIButton) event.getSource()).inform(this);
     }
 
     /***/

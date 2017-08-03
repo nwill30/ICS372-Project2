@@ -1,28 +1,34 @@
-public class FridgeClosedState extends RefrigeratorState {
+public class FridgeClosedState extends FridgeState implements
+        FridgeDoorOpenListner{
     private static FridgeClosedState instance;
-    static{
-        instance = new FridgeClosedState();
+
+    private FridgeClosedState(){}
+
+    public void leave(){
+        FridgeDoorOpenManager.instance().removeFridgeDoorOpenListner(instance);
     }
 
     public static FridgeClosedState instance(){
+        if(instance == null){
+            instance = new FridgeClosedState();
+        }
         return instance;
     }
 
+
     public void processFridgeOpen(){
-        context.changeCurrentState(FridgeOpenState.instance());
+        context.changeFridgeCurrentState(FridgeOpenState.instance());
     }
     @Override
     public void run() {
         display.fridgeDoorClosed();
         display.turnFridgeLightOff();
-
     }
 
     @Override
-    public void handle(Object event) {
-        if(event.equals(RefrigeratorContext.Events.FRIDGE_OPEN_EVENT)){
-            processFridgeOpen();
-        }
+    public void fridgeDoorOpened(FridgeDoorOpenEvent even) {
+        context.changeFridgeCurrentState(FridgeOpenState.instance());
     }
+
 }
 
