@@ -55,17 +55,17 @@ public abstract class RefrigeratorDisplay extends Observable {
     /**
      * Display the current room temerature.
      * */
-    public abstract void displayRoomTemp(int value);
+    public abstract void displayRoomTemp();
 
     /**
      * Display the current fridge temerature.
      * */
-    public abstract void displayFridgeTemp(int value);
+    public abstract void displayFridgeTemp();
 
     /**
      * Display the current freezer temerature.
      * */
-    public abstract void displayFreezerTemp(int value);
+    public abstract void displayFreezerTemp();
 
     /**
      * Indicate that the Freezer light is on

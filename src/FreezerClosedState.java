@@ -1,6 +1,6 @@
 
 public class FreezerClosedState extends FreezerState implements
-        FreezerDoorOpenListener {
+        FreezerDoorOpenListener, FreezerTempListener {
     private static FreezerClosedState instance;
 
     private FreezerClosedState(){}
@@ -8,6 +8,7 @@ public class FreezerClosedState extends FreezerState implements
     @Override
     public void leave(){
         FreezerDoorOpenManager.instance().removeFreezerDoorOpenListener(instance);
+        FreezerTempManager.instance().removeFreezerTempListener(instance);
 
     }
 
@@ -25,6 +26,7 @@ public class FreezerClosedState extends FreezerState implements
     @Override
     public void run() {
         FreezerDoorOpenManager.instance().addFreezerDoorOpenListner(instance);
+        FreezerTempManager.instance().addFreezerTempListener(instance);
         display.freezerDoorClosed();
         display.turnFreezerLightOff();
 
@@ -33,5 +35,10 @@ public class FreezerClosedState extends FreezerState implements
     @Override
     public void freezerDoorOpened(FreezerDoorOpenEvent event) {
         context.changeFreezerCurrentState(FreezerOpenState.instance());
+    }
+
+    @Override
+    public void temperatureSet(FreezerTempEvent event) {
+        FreezerTempState.instance().run();
     }
 }
