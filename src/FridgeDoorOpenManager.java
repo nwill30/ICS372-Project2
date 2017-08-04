@@ -24,10 +24,10 @@ public class FridgeDoorOpenManager {
     /**
      * Adds a listner
      *
-     * @param listner and objec tthat wants to listend to the event
+     * @param listener and objec tthat wants to listend to the event
      * */
-    public void addFridgeDoorOpenListner(FridgeDoorOpenListener listner){
-        listenerList.add(FridgeDoorOpenListener.class, listner);
+    public void addFridgeDoorOpenListener(FridgeDoorOpenListener listener){
+        listenerList.add(FridgeDoorOpenListener.class, listener);
     }
 
     /**

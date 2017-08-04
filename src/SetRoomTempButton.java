@@ -8,6 +8,6 @@ public class SetRoomTempButton extends GUIButton {
 
     @Override
     public void inform(RefrigeratorDisplay display) {
-
+        RoomTempManager.instance().processEvent(new RoomTempEvent(display));
     }
 }

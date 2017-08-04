@@ -55,9 +55,9 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
         private JLabel statusLbl = new JLabel("Status");
         private JLabel fridgeLight = new JLabel("Fridge ligtht off");
         private JLabel freezerLight = new JLabel("Freezer light off");
-        private JLabel fridgeTemp = new JLabel("            ");
-        private JLabel freezerTemp = new JLabel("            ");
-        private JLabel roomTemp = new JLabel("            ");
+        private JLabel fridgeTemp = new JLabel("Fridge Temp:              ");
+        private JLabel freezerTemp = new JLabel("Freezer Temp:            ");
+        private JLabel roomTemp = new JLabel("Room Temp:           ");
         private JLabel fridgeStatus = new JLabel("Idle");
         private JLabel freezerStatus = new JLabel("Idle");
         private JTextField roomTempTextField = new JTextField("INPUT ROOM TEMP HERE");
@@ -104,6 +104,7 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
             fridgeDoorOpenBtn.addActionListener(GUIDisplay.this);
             setFreezerTempBtn.addActionListener(GUIDisplay.this);
             setFridgeTempBtn.addActionListener(GUIDisplay.this);
+            setRoomTempBtn.addActionListener(GUIDisplay.this);
 
             pack();
             setVisible(true);
@@ -117,15 +118,45 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
 
     /***/
     @Override
-    public void displayRoomTemp(int value){ frame.roomTemp.setText(" " + value);}
+    public void displayRoomTemp(){
+        try{
+            double value = Double.parseDouble(frame.roomTempTextField.getText());
+            if(value >= 50 && value <= 110){
+                frame.roomTemp.setText("Room Temp:              " + value);
+            }else
+                frame.roomTemp.setText("Invalid Temp must be between 50-110");
+        }catch (NumberFormatException nfe){
+            frame.roomTemp.setText("Please Enter Numbers");
+        }
+    }
 
     /***/
     @Override
-    public void displayFridgeTemp(int value){ frame.fridgeTemp.setText(" " + value);};
+    public void displayFridgeTemp(){
+        try {
+            double value = Double.parseDouble(frame.fridgeTempTextField.getText());
+            if (value <= 41.0 && value >= 37.0) {
+                frame.fridgeTemp.setText("Fridge Temp:              " + value);
+            } else
+                frame.fridgeTemp.setText("Invalid Temp must be between 37-41");
+        }catch (NumberFormatException nfe){
+            frame.fridgeTemp.setText("Please Enter Numbers");
+        }
+    }
 
     /***/
     @Override
-    public void displayFreezerTemp(int value){ frame.freezerTemp.setText(" " + value);};
+    public void displayFreezerTemp(){
+        try {
+            double value = Double.parseDouble(frame.freezerTempTextField.getText());
+            if (value <= 0.0 && value >= -9.0) {
+                frame.freezerTemp.setText("Freezer Temp:            " + value);
+            } else
+                frame.freezerTemp.setText("Invalid Temp must be between -9 and 0");
+        }catch (NumberFormatException nfe){
+            frame.freezerTemp.setText("Please Enter Numbers");
+        }
+    }
 
     /**
      * Display a text indicating that the freezer light is on

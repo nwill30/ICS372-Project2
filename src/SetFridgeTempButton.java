@@ -8,6 +8,6 @@ public class SetFridgeTempButton extends GUIButton {
 
     @Override
     public void inform(RefrigeratorDisplay display) {
-
+        FridgeTempManager.instance().processEvent(new FridgeTempEvent(display));
     }
 }
