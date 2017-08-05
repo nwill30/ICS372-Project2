@@ -49,8 +49,9 @@ public abstract class RefrigeratorDisplay extends Observable {
      */
     public void initialize() {
         context.initialize();
-        context.initialize();
     }
+
+    public abstract void displayCurrentTime();
 
     /**
      * Display the current room temerature.

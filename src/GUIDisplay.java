@@ -29,6 +29,8 @@ import javax.swing.*;
 public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
     private static SimpleDisplay frame;
 
+
+
     /**
      * Creates the frame and displays it.
      */
@@ -53,20 +55,24 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
         private JLabel setFridgeTempLbl = new JLabel("Desired fridge temp");
         private JLabel setFreezerTempLbl = new JLabel("Desired freezer temp");
         private JLabel statusLbl = new JLabel("Status");
-        private JLabel fridgeLight = new JLabel("Fridge ligtht off");
+        private JLabel fridgeLight = new JLabel("Fridge light off");
         private JLabel freezerLight = new JLabel("Freezer light off");
         private JLabel fridgeTemp = new JLabel("Fridge Temp:              ");
         private JLabel freezerTemp = new JLabel("Freezer Temp:            ");
         private JLabel roomTemp = new JLabel("Room Temp:           ");
+        private JLabel time = new JLabel("Current Time:            " + Timer.instance().getTimeValue());
         private JLabel fridgeStatus = new JLabel("Idle");
         private JLabel freezerStatus = new JLabel("Idle");
         private JTextField roomTempTextField = new JTextField("INPUT ROOM TEMP HERE");
-        private JTextField fridgeTempTextField = new JTextField("INPUT FRIDGE TEMP BETWEEN 37 and 41 F");
-        private JTextField freezerTempTextField = new JTextField("INPUT FREEZER TEMP BETWEEN -9 and 0 F");
+        private JTextField fridgeTempTextField = new JTextField("INPUT FRIDGE TEMP");
+
+        private JTextField freezerTempTextField = new JTextField("INPUT FREEZER TEMP");
         private JLabel spaceFiller = new JLabel("                 ");
 
+
+
         /**
-         * Set up the JFrame
+       * Set up the JFrame
          */
         private SimpleDisplay() {
             super("Refrigerator");
@@ -82,22 +88,17 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
             getContentPane().add(setFreezerTempBtn);
             getContentPane().add(fridgeDoorOpenBtn);
             getContentPane().add(fridgeDoorCloseBtn);
-//            getContentPane().add(spaceFiller);
             getContentPane().add(freezerDoorOpenBtn);
             getContentPane().add(freezerDoorCloseBtn);
-//            getContentPane().add(spaceFiller);
             getContentPane().add(statusLbl);
-//            getContentPane().add(spaceFiller);
-//            getContentPane().add(spaceFiller);
             getContentPane().add(fridgeLight);
             getContentPane().add(freezerLight);
-//            getContentPane().add(spaceFiller);
             getContentPane().add(fridgeTemp);
             getContentPane().add(freezerTemp);
             getContentPane().add(roomTemp);
-//            getContentPane().add(spaceFiller);
             getContentPane().add(fridgeStatus);
             getContentPane().add(freezerStatus);
+            getContentPane().add(time);
             freezerDoorCloseBtn.addActionListener(GUIDisplay.this);
             freezerDoorOpenBtn.addActionListener(GUIDisplay.this);
             fridgeDoorCloseBtn.addActionListener(GUIDisplay.this);
@@ -124,8 +125,10 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
             if(value >= 50 && value <= 110){
                 frame.roomTemp.setText("Room Temp:              " + value);
             }else
-                frame.roomTemp.setText("Invalid Temp must be between 50-110");
-        }catch (NumberFormatException nfe){
+                frame.roomTemp.setText("Invalid Temp must be between " + context.getRoomLow()
+                        + " and " + context.getRoomHigh());
+        }
+        catch (NumberFormatException nfe){
             frame.roomTemp.setText("Please Enter Numbers");
         }
     }
@@ -135,11 +138,13 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
     public void displayFridgeTemp(){
         try {
             double value = Double.parseDouble(frame.fridgeTempTextField.getText());
-            if (value <= 41.0 && value >= 37.0) {
+            if (value <= context.getFridgeLow() && value >= context.getFridgeHigh()) {
                 frame.fridgeTemp.setText("Fridge Temp:              " + value);
             } else
-                frame.fridgeTemp.setText("Invalid Temp must be between 37-41");
-        }catch (NumberFormatException nfe){
+                frame.fridgeTemp.setText("Invalid Temp must be between " + context.getFridgeLow()
+                        + " and " + context.getFridgeHigh());
+        }
+        catch (NumberFormatException nfe){
             frame.fridgeTemp.setText("Please Enter Numbers");
         }
     }
@@ -149,11 +154,14 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
     public void displayFreezerTemp(){
         try {
             double value = Double.parseDouble(frame.freezerTempTextField.getText());
-            if (value <= 0.0 && value >= -9.0) {
+            if (value <= context.getFreezerLow() && value >= context.getFreezerHigh()) {
                 frame.freezerTemp.setText("Freezer Temp:            " + value);
             } else
-                frame.freezerTemp.setText("Invalid Temp must be between -9 and 0");
-        }catch (NumberFormatException nfe){
+                frame.freezerTemp.setText("Invalid Temp must be between " + context.getFreezerHigh()
+                        + " and " + context.getFreezerLow());
+        }
+
+        catch (NumberFormatException nfe){
             frame.freezerTemp.setText("Please Enter Numbers");
         }
     }
@@ -224,19 +232,25 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
 
     /***/
     @Override
-    public void freezerCooling(){frame.freezerStatus.setText("Freezer Cooling");};
+    public void freezerCooling(){frame.freezerStatus.setText("Freezer Cooling");}
 
     /***/
     @Override
-    public void freezerIdle(){frame.freezerStatus.setText("Freezer Idle");};
+    public void freezerIdle(){frame.freezerStatus.setText("Freezer Idle");}
 
     /***/
     @Override
-    public void fridgeCooling(){frame.fridgeStatus.setText("Fridge Cooling");};
+    public void fridgeCooling(){frame.fridgeStatus.setText("Fridge Cooling");}
 
     /***/
     @Override
-    public void fridgeIdle(){frame.fridgeStatus.setText("Fridge Idle");};
+    public void fridgeIdle(){frame.fridgeStatus.setText("Fridge Idle");}
+
+    public void displayCurrentTime(){
+        int currentTime = Timer.instance().getTimeValue();
+        Timer.instance().setTimeValue(currentTime + 1);
+        frame.time.setText("Current Time:            " + Timer.instance().getTimeValue());
+    }
 
     /**
      * Start the whole show
