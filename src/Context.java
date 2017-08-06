@@ -26,6 +26,8 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 /**
  * The context is an obserer for the clock and stores the context info for
@@ -33,6 +35,7 @@ import java.util.Observer;
  *
  */
 public class Context {
+    //these are all the variables to be imported from the config file.
     private int fridgeLow;
     private int fridgeHigh;
     private int freezerLow;
@@ -47,12 +50,19 @@ public class Context {
     private int freezerCompressorStartDiff;
     private int fridgeCoolRate;
     private int freezerCoolRate;
+    private int currentFreezerTemp;
+    private int currentFridgeTemp;
+    private int currentRoomTemp;
+    private int desiredFridgeTemp = fridgeLow;
+    private int desiredFreezerTemp = freezerLow;
     private static RefrigeratorDisplay refrigeratorDisplay;
     private FreezerState freezerCurrentState;
     private FridgeState fridgeCurrentState;
     private static Context instance;
 
-     /**
+
+    /**
+
      * Make it a singleton
      */
     private Context() {
@@ -82,6 +92,7 @@ public class Context {
         String fileName = chooseFile();
         System.out.println(fileName);
         processFile(fileName);
+        getDisplay().randomizeStartingTemps();
         instance.changeFreezerCurrentState(FreezerClosedState.instance());
         instance.changeFridgeCurrentState(FridgeClosedState.instance());
 
@@ -119,6 +130,11 @@ public class Context {
         return refrigeratorDisplay;
     }
 
+    /**
+     * Opens a J-File chooser to implement reading in to a config file. I know this isn't in the main method but
+     * I consider it more flexible.
+     * @return
+     */
     private static String chooseFile() {
 
         JFileChooser chooser;
@@ -139,6 +155,10 @@ public class Context {
 
     }
 
+    /**
+     * This processes the file and assigns them properly.
+     * @param iFile
+     */
     private void processFile(String iFile){
         int i = 0;
         BufferedReader iBuffer;
@@ -171,14 +191,14 @@ public class Context {
             roomHigh = values[5];
             fridgeRateLossDoorClosed = values[6];
             fridgeRateLossDoorOpened = values[7];
-            freezerRateLossDoorOpen = values[8];
-            freezerRateLossDoorClosed = values[9];
+            freezerRateLossDoorOpen = values[9];
+            freezerRateLossDoorClosed = values[8];
             fridgeCompressorStartDiff = values[10];
             freezerCompressorStartDiff = values[11];
             fridgeCoolRate = values[12];
             freezerCoolRate = values[13];
 
-           // System.out.println(Arrays.toString(values));
+            System.out.println(Arrays.toString(values));
         }
         catch (Exception e){
             System.err.println("Reading failed at line" + lineNumber);
@@ -187,6 +207,12 @@ public class Context {
 
     }
 
+    /**
+     * Extract everything besides numbers from a source string this makes it easier to read the file
+     *
+     * @param source
+     * @return
+     */
     private String extractNumberFromString(String source) {
         StringBuilder endString = new StringBuilder(100);
         for (char ch : source.toCharArray()) {
@@ -197,12 +223,16 @@ public class Context {
             if (ch >= '0' && ch <= '9') {
                 endString.append(ch);
             }
+            else if(ch == '-'){
+                endString.append('-');
+            }
             else
                 endString.append(" ");
         }
 
         return endString.toString();
     }
+
 
     public int getFridgeLow() {
         return fridgeLow;
@@ -315,4 +345,54 @@ public class Context {
     public void setFreezerCoolRate(int freezerCoolRate) {
         this.freezerCoolRate = freezerCoolRate;
     }
+
+    public int getCurrentFreezerTemp() {
+        return currentFreezerTemp;
+    }
+
+    public void setCurrentFreezerTemp(int currentFreezerTemp) {
+        this.currentFreezerTemp = currentFreezerTemp;
+    }
+
+    public int getCurrentFridgeTemp() {
+        return currentFridgeTemp;
+    }
+
+    public void setCurrentFridgeTemp(int currentFridgeTemp) {
+        this.currentFridgeTemp = currentFridgeTemp;
+    }
+
+    public int getCurrentRoomTemp() {
+        return currentRoomTemp;
+    }
+
+    public void setCurrentRoomTemp(int currentRoomTemp) {
+        this.currentRoomTemp = currentRoomTemp;
+    }
+
+    public FreezerState getFreezerCurrentState(){
+        return freezerCurrentState;
+    }
+
+    public FridgeState getFridgeCurrentState(){
+        return fridgeCurrentState;
+    }
+
+    public int getDesiredFridgeTemp(){
+        return desiredFridgeTemp;
+    }
+
+    public void setDesiredFridgeTemp(int value){
+        this.desiredFridgeTemp = value;
+    }
+
+    public int getDesiredFreezerTemp(){
+        return desiredFreezerTemp;
+    }
+
+    public void setDesiredFreezerTemp(int value){
+        this.desiredFreezerTemp = value;
+    }
+
+
 }

@@ -28,14 +28,14 @@ import javax.swing.event.EventListenerList;
  * @author Brahma Dathan
  *
  */
-public class TimerTickedManager {
+public class FridgeTimerTickedManager {
     private EventListenerList listenerList = new EventListenerList();
-    private static TimerTickedManager instance;
+    private static FridgeTimerTickedManager instance;
 
     /**
      * The constructor is private to ensure that it is a singleton
      */
-    private TimerTickedManager() {
+    private FridgeTimerTickedManager() {
     }
 
     /**
@@ -43,9 +43,9 @@ public class TimerTickedManager {
      *
      * @return the only instance of the class
      */
-    public static TimerTickedManager instance() {
+    public static FridgeTimerTickedManager instance() {
         if (instance == null) {
-            instance = new TimerTickedManager();
+            instance = new FridgeTimerTickedManager();
         }
         return instance;
     }
@@ -56,8 +56,8 @@ public class TimerTickedManager {
      * @param listener
      *            the listener to be added
      */
-    public void addTimerTickedListener(TimerTickedListener listener) {
-        listenerList.add(TimerTickedListener.class, listener);
+    public void addTimerTickedListener(FridgeTimerTickedListener listener) {
+        listenerList.add(FridgeTimerTickedListener.class, listener);
     }
 
     /**
@@ -66,8 +66,8 @@ public class TimerTickedManager {
      * @param listener
      *            the listener to be removed
      */
-    public void removeTimerTickedListener(TimerTickedListener listener) {
-        listenerList.remove(TimerTickedListener.class, listener);
+    public void removeTimerTickedListener(FridgeTimerTickedListener listener) {
+        listenerList.remove(FridgeTimerTickedListener.class, listener);
     }
 
     /**
@@ -75,11 +75,11 @@ public class TimerTickedManager {
      *
      * @param event
      */
-    public void processEvent(TimerTickedEvent event) {
+    public void processEvent(FridgeTimerTickedEvent event) {
         EventListener[] listeners = listenerList
-                .getListeners(TimerTickedListener.class);
+                .getListeners(FridgeTimerTickedListener.class);
         for (int index = 0; index < listeners.length; index++) {
-            ((TimerTickedListener) listeners[index]).timerTicked(event);
+            ((FridgeTimerTickedListener) listeners[index]).timerTicked(event);
         }
     }
 }

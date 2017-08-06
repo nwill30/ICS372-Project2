@@ -10,5 +10,5 @@ FreezerRateLossDoorClosed=10
 FreezerRateLossDoorOpened=1
 FridgeCompressorStartDiff=2
 FreezerCompressorStartDiff=1
-FridgeCoolRate=20
-FreezerCoolRate=30
+FridgeCoolRate=3
+FreezerCoolRate=3

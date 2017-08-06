@@ -1,6 +1,9 @@
 import javax.swing.event.EventListenerList;
 import java.util.EventListener;
 
+/**
+ * manages
+ */
 public class FreezerDoorCloseManager {
     private EventListenerList listenerList = new EventListenerList();
     private static FreezerDoorCloseManager instance;

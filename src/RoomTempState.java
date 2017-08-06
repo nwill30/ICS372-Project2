@@ -1,3 +1,4 @@
+
 public class RoomTempState extends FridgeState {
 
     private static RoomTempState instance;

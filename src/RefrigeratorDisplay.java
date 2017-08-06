@@ -51,7 +51,6 @@ public abstract class RefrigeratorDisplay extends Observable {
         context.initialize();
     }
 
-    public abstract void displayCurrentTime();
 
     /**
      * Display the current room temerature.
@@ -112,7 +111,11 @@ public abstract class RefrigeratorDisplay extends Observable {
     /**
      * Indicating the freezer is in a cooling state.
      * */
-    public abstract void freezerCooling();
+
+
+    public abstract boolean isFreezerCooling();
+
+    public abstract boolean isFridgeCooling();
 
     /**
      * Indicating the freezer is in an idle state.
@@ -129,4 +132,11 @@ public abstract class RefrigeratorDisplay extends Observable {
      * */
     public abstract void fridgeIdle();
 
+    public void randomizeStartingTemps() {
+    }
+
+    public void freezerDisplayCurrentTime() {
+    }
+
+    public abstract void fridgeDisplayCurrentTime();
 }
