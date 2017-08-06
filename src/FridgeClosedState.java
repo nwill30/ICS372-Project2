@@ -1,5 +1,8 @@
+/**
+ * Represents the state when the fridge is closed and the states it can move to.
+ */
 public class FridgeClosedState extends FridgeState implements
-        FridgeDoorOpenListener, FridgeTempListener, RoomTempListener {
+        FridgeDoorOpenListener, FridgeTempListener, RoomTempListener,FridgeTimerTickedListener {
     private static FridgeClosedState instance;
 
     private FridgeClosedState(){}
@@ -8,6 +11,7 @@ public class FridgeClosedState extends FridgeState implements
         FridgeDoorOpenManager.instance().removeFridgeDoorOpenListener(instance);
         FridgeTempManager.instance().removeFridgeTempListener(instance);
         RoomTempManager.instance().removeRoomTempListener(instance);
+        FridgeTimerTickedManager.instance().removeTimerTickedListener(instance);
     }
 
     public static FridgeClosedState instance(){
@@ -18,20 +22,18 @@ public class FridgeClosedState extends FridgeState implements
     }
 
 
-    public void processFridgeOpen(){
-        context.changeFridgeCurrentState(FridgeOpenState.instance());
-    }
     @Override
     public void run() {
         FridgeDoorOpenManager.instance().addFridgeDoorOpenListener(instance);
         FridgeTempManager.instance().addFridgeTempListener(instance);
         RoomTempManager.instance().addRoomTempListener(instance);
+        FridgeTimerTickedManager.instance().addTimerTickedListener(instance);
         display.fridgeDoorClosed();
         display.turnFridgeLightOff();
     }
 
     @Override
-    public void fridgeDoorOpened(FridgeDoorOpenEvent even) {
+    public void fridgeDoorOpened(FridgeDoorOpenEvent event) {
         context.changeFridgeCurrentState(FridgeOpenState.instance());
     }
 
@@ -43,6 +45,11 @@ public class FridgeClosedState extends FridgeState implements
     @Override
     public void temperatureSet(RoomTempEvent event) {
         RoomTempState.instance().run();
+    }
+
+    @Override
+    public void timerTicked(FridgeTimerTickedEvent event) {
+        display.fridgeDisplayCurrentTime();
     }
 }
 

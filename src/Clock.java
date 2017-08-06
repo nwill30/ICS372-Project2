@@ -52,7 +52,7 @@ public class Clock extends Observable implements Runnable {
 
     /**
      * Infinite loop to generate the clock ticks Notify all users when clock
-     * ticks
+     * ticks. This delays for only one second but it simulates a minute for all intents and purposes.
      */
     @Override
     public void run() {

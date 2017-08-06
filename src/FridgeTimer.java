@@ -21,17 +21,17 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * The Timer for the microwave
+ * The Timer for the fridge
  *
  */
-public class Timer implements Observer {
-    private static Timer instance;
+public class FridgeTimer implements Observer {
+    private static FridgeTimer instance;
     private int timeValue = 0;
 
     /**
      * For singleton
      */
-    private Timer() {
+    private FridgeTimer() {
         instance = this;
         Clock.instance().addObserver(instance);
     }
@@ -41,9 +41,9 @@ public class Timer implements Observer {
      *
      * @return the instance
      */
-    public static Timer instance() {
+    public static FridgeTimer instance() {
         if (instance == null) {
-            instance = new Timer();
+            instance = new FridgeTimer();
         }
         return instance;
     }
@@ -58,12 +58,12 @@ public class Timer implements Observer {
         this.timeValue = value;
     }
 
-//    /**
-//     * Add to the time value
-//     *
-//     * @param value
-//     *            extra time for the time value
-//     */
+    //    /**
+////     * Add to the time value
+////     *
+////     * @param value
+////     *            extra time for the time value
+////     */
 //    public void addTimeValue(int value) {
 //        timeValue += value;
 //    }
@@ -82,6 +82,6 @@ public class Timer implements Observer {
      */
     @Override
     public void update(Observable clock, Object value) {
-        TimerTickedManager.instance().processEvent(new TimerTickedEvent(instance));
+        FridgeTimerTickedManager.instance().processEvent(new FridgeTimerTickedEvent(instance));
     }
 }

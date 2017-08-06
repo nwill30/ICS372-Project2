@@ -17,20 +17,23 @@
  * The authors do not make any claims regarding the correctness of the code in this module
  * and are not responsible for any loss or damage resulting from its use.
  */
-import java.util.EventListener;
+import java.util.EventObject;
 
 /**
- * To be implemented by any class that waits for timer ticks
+ * The class represents the ticking of a timer.
  *
  * @author Brahma Dathan
  *
  */
-public interface TimerTickedListener extends EventListener {
+public class FreezerTimerTickedEvent extends EventObject {
     /**
-     * When the timer ticks, this method gets called
+     * Creates an instance. Does not store any info.
      *
-     * @param event
-     *            the event object
+     * @param source
+     *            the creator
      */
-    public void timerTicked(TimerTickedEvent event);
+    public FreezerTimerTickedEvent(Object source) {
+        super(source);
+    }
+
 }

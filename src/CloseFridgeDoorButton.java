@@ -6,6 +6,10 @@ public class CloseFridgeDoorButton extends GUIButton {
         super(s);
     }
 
+    /**
+     * Creates a FridgeDoorCloseEvent so that it can be received by other interested states.
+     *
+     */
     @Override
     public void inform(RefrigeratorDisplay display) {
         FridgeDoorCloseManager.instance().processEvent(new FridgeDoorCloseEvent(display));
